@@ -112,7 +112,9 @@ a { color: inherit; }
 /* ---------- Hero ---------- */
 .hero {
   padding: 6rem 5vw 7rem;
-  background: var(--navy);
+  background:
+    linear-gradient(90deg, rgba(14, 42, 71, 0.92), rgba(14, 42, 71, 0.55)),
+    url("../images/fitness_img.jpg") center / cover no-repeat;
 }
 
 .hero-inner { max-width: 900px; }
