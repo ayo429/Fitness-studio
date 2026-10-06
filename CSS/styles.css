@@ -160,25 +160,32 @@ a { color: inherit; }
 /* ---------- Steps ---------- */
 .steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
   margin: 2.5rem 0 0;
   padding: 0;
   list-style: none;
-  counter-reset: step;
 }
 
-.steps li { counter-increment: step; }
+.step-card {
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+}
 
-.steps li::before {
-  content: counter(step);
+.step-card img {
   display: block;
-  margin-bottom: 0.5rem;
-  font-family: var(--font-heading);
-  font-size: 3.5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: var(--orange-dark);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.step-body {
+  padding: 1.5rem;
+}
+
+.step-body p {
+  margin: 0;
 }
 
 /* ---------- Sign up ---------- */
