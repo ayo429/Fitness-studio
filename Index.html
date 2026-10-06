@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stride Fitness | Train at your pace</title>
+  <meta name="description" content="Stride Fitness offers strength, cardio, and mobility classes for every level. Start with a free week.">
+
+  <!-- Google Fonts: Barlow Condensed (headings) + Barlow (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- External stylesheet -->
+  <link rel="stylesheet" href="CSS/styles.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="logo" href="#top">Stride</a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a class="btn btn-small" href="#join">Start free week</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <h1>Train at your pace. Get stronger anyway.</h1>
+        <p class="hero-text">Strength, cardio, and mobility classes for every level, led by coaches who adjust the workout to you.</p>
+        <a class="btn" href="#join">Start your free week</a>
+      </div>
+    </section>
+
+    <!-- Programs -->
+    <section class="section" id="programs">
+      <h2>Pick a program</h2>
+      <p class="section-intro">Three ways to train. Switch any time.</p>
+
+      <div class="program-grid">
+        <article class="program">
+          <h3>Strength</h3>
+          <p>Learn the basic lifts with coached sets, then add weight as you get stronger.</p>
+          <p class="program-meta">45 min, 4 days a week</p>
+        </article>
+
+        <article class="program program-featured">
+          <h3>Cardio</h3>
+          <p>Intervals on bikes, rowers, and the track that build stamina without wrecking your week.</p>
+          <p class="program-meta">30 min, 3 days a week</p>
+        </article>
+
+        <article class="program">
+          <h3>Mobility</h3>
+          <p>Slow, guided sessions that loosen tight hips and shoulders and help you recover.</p>
+          <p class="program-meta">30 min, 2 days a week</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- How it works (a real sequence, so numbered) -->
+    <section class="section section-tint" id="how-it-works">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>
+          <h3>Tell us your goal</h3>
+          <p>Answer a few questions about your schedule and experience.</p>
+        </li>
+        <li>
+          <h3>Get your plan</h3>
+          <p>A coach builds a weekly plan that fits your calendar.</p>
+        </li>
+        <li>
+          <h3>Show up and train</h3>
+          <p>Join a class, follow your plan, and track your progress.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Sign up -->
+    <section class="section" id="join">
+      <div class="join-card">
+        <h2>Start your free week</h2>
+        <p>No card needed. Enter your email and we'll send your first plan.</p>
+
+        <form class="join-form" action="#" method="post">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          <button class="btn" type="submit">Send my plan</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Stride Fitness. Practicum project, Week 1.</p>
+  </footer>
+
+</body>
+</html>
