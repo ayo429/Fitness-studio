@@ -5,13 +5,10 @@
 Stride Fitness is a fictional gym that offers strength, cardio, and mobility classes for every level. This week's deliverable is the landing page. Its job is to explain what Stride offers and get visitors to sign up for a free week.
 
 ## Files
-
-```
-fitness-site/
-├── index.html   # Page structure and content
-├── styles.css   # All styling (external stylesheet)
-└── README.md    # Project documentation
-```
+CSS/
+images/
+Index.html
+README.md
 
 ## Page sections
 
