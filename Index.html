@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Stride Fitness | Train at your pace</title>
-  <meta name="description" content="Stride Fitness offers strength, cardio, and mobility classes for every level. Start with a free week.">
+  <meta name="description"
+    content="Stride Fitness offers strength, cardio, and mobility classes for every level. Start with a free week.">
 
   <!-- Google Fonts: Barlow Condensed (headings) + Barlow (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="CSS/styles.css">
 </head>
+
 <body>
 
   <header class="site-header">
-    <a class="logo" href="#top">Stride</a>
+    <a class="logo" href="#top">Stride <span>Fitness</span></a>
     <nav aria-label="Main navigation">
       <ul class="nav-list">
         <li><a href="#programs">Programs</a></li>
+        <li><a href="#plans">Plans</a></li>
         <li><a href="#how-it-works">How it works</a></li>
         <li><a class="btn btn-small" href="#join">Start free week</a></li>
       </ul>
@@ -31,7 +36,8 @@
     <section class="hero">
       <div class="hero-inner">
         <h1>Train at your pace. Get stronger anyway.</h1>
-        <p class="hero-text">Strength, cardio, and mobility classes for every level, led by coaches who adjust the workout to you.</p>
+        <p class="hero-text">Strength, cardio, and mobility classes for every level, led by coaches who adjust the
+          workout to you.</p>
         <a class="btn" href="#join">Start your free week</a>
       </div>
     </section>
@@ -64,31 +70,76 @@
 
     <!-- How it works (a real sequence, so numbered) -->
     <section class="section section-tint" id="how-it-works">
-  <h2>How it works</h2>
-  <ol class="steps">
-    <li class="step-card">
-      <img src="images/goal_img.jpg" alt="Person setting a fitness goal">
-      <div class="step-body">
-        <h3>Tell us your goal</h3>
-        <p>Answer a few questions about your schedule and experience.</p>
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li class="step-card">
+          <img src="images/goal_img.jpg" alt="Person setting a fitness goal">
+          <div class="step-body">
+            <h3>Tell us your goal</h3>
+            <p>Answer a few questions about your schedule and experience.</p>
+          </div>
+        </li>
+        <li class="step-card">
+          <img src="images/plan_img.jpg" alt="Weekly workout plan">
+          <div class="step-body">
+            <h3>Get your plan</h3>
+            <p>A coach builds a weekly plan that fits your calendar.</p>
+          </div>
+        </li>
+        <li class="step-card">
+          <img src="images/train_img.jpg" alt="Person training in the gym">
+          <div class="step-body">
+            <h3>Show up and train</h3>
+            <p>Join a class, follow your plan, and track your progress.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+    <!-- Membership plans -->
+    <section class="section" id="plans">
+      <h2>Choose your plan</h2>
+      <p class="section-intro">Every plan includes a free first week. Cancel any time.</p>
+
+      <div class="plan-grid">
+
+        <article class="plan">
+          <h3>Regular</h3>
+          <p class="plan-price">$29<span>/month</span></p>
+          <ul class="plan-features">
+            <li>Gym access, 6 am to 4 pm</li>
+            <li>Weights and cardio floor</li>
+            <li>Locker room access</li>
+          </ul>
+          <a class="btn btn-outline" href="#join">Choose Regular</a>
+        </article>
+
+        <article class="plan plan-featured">
+          <p class="plan-badge">Most popular</p>
+          <h3>Premium</h3>
+          <p class="plan-price">$59<span>/month</span></p>
+          <ul class="plan-features">
+            <li>Gym access, all opening hours</li>
+            <li>All group classes included</li>
+            <li>Monthly progress check-in</li>
+            <li>Bring one guest per month</li>
+          </ul>
+          <a class="btn" href="#join">Choose Premium</a>
+        </article>
+
+        <article class="plan">
+          <h3>Elite</h3>
+          <p class="plan-price">$99<span>/month</span></p>
+          <ul class="plan-features">
+            <li>24/7 gym access</li>
+            <li>All classes and private studio</li>
+            <li>Two personal training sessions a month</li>
+            <li>Sauna and recovery lounge</li>
+          </ul>
+          <a class="btn btn-outline" href="#join">Choose Elite</a>
+        </article>
+
       </div>
-    </li>
-    <li class="step-card">
-      <img src="images/plan_img.jpg" alt="Weekly workout plan">
-      <div class="step-body">
-        <h3>Get your plan</h3>
-        <p>A coach builds a weekly plan that fits your calendar.</p>
-      </div>
-    </li>
-    <li class="step-card">
-      <img src="images/train_img.jpg" alt="Person training in the gym">
-      <div class="step-body">
-        <h3>Show up and train</h3>
-        <p>Join a class, follow your plan, and track your progress.</p>
-      </div>
-    </li>
-  </ol>
-</section>
+    </section>
 
     <!-- Sign up -->
     <section class="section" id="join">
@@ -107,8 +158,24 @@
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Stride Fitness. Practicum project, Week 1.</p>
+    <div class="foot">
+
+      <div class="copy">
+        <p>&copy; 2026 Stride Fitness. Practicum project, Week 1.</p>
+      </div>
+
+      <div class="foot-links">
+        <ul>
+          <li><a href="#top">Back to top</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#plans">Plans</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+        </ul>
+      </div>
+
+    </div>
   </footer>
 
 </body>
+
 </html>
