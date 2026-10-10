@@ -391,23 +391,137 @@ span {
 }
 
 .site-footer p {
+  margin: 0 0 0.5rem;
+}
+
+/* Main footer layout */
+.foot {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* Legal section */
+.foot-legal p {
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.legal-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.legal-links a {
+  color: var(--tint);
+  text-decoration: none;
+  opacity: 0.7;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+}
+
+.legal-links a:hover {
+  opacity: 1;
+}
+
+/* Nav links */
+.foot-links ul {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-.foot{
-  display:flex;
-  justify-content: space-between;
+.foot-links li {
+  margin-bottom: 0.5rem;
 }
 
-.foot-links{
-  display: flex;
-  flex-direction: column;
-}
-
-.foot-links a{
+.foot-links a {
   color: var(--tint);
   text-decoration: none;
-  margin-bottom: 0.5rem;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.foot-links a:hover {
+  opacity: 1;
+}
+
+/* Social icons */
+
+.foot-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.2s;
+}
+
+.foot-social a:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.foot-social img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1); /* makes icons white */
+}
+
+/* Contact */
+.foot-contact p {
+  opacity: 0.8;
+  margin-bottom: 0.4rem;
+}
+
+/* Newsletter */
+.foot-newsletter p {
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.newsletter-form input {
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--tint);
+  border-radius: 6px;
+  outline: none;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.newsletter-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.newsletter-form input:focus {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.newsletter-form button {
+  padding: 0.45rem 1rem;
+  background: var(--orange, #f26419);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+.newsletter-form button:hover {
+  opacity: 0.85;
 }
 
 /* ---------- Small screens ---------- */
