@@ -1,1 +1,62 @@
 @import "tailwindcss";
+
+@theme {
+  --color-navy: #0e2a47;
+  --color-snow: #f4f7fa;
+  --color-brand: #ff6b35;
+  --color-brand-dark: #d9531f;
+  --color-tint: #dce8f5;
+  --color-ink: #33475b;
+
+  --font-heading: "Montserrat", "Arial Narrow", Arial, sans-serif;
+  --font-body: "Inter", Arial, sans-serif;
+}
+
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-snow font-body text-lg leading-relaxed text-ink;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-heading font-bold leading-tight text-navy mb-2;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+  }
+  h2 {
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+  }
+  h3 {
+    @apply text-[1.35rem];
+  }
+
+  p {
+    @apply mb-4 max-w-[60ch];
+  }
+
+  :focus-visible {
+    @apply outline-[3px] outline-offset-[3px] outline-brand;
+  }
+}
+
+/* Buttons are reused in Navbar, Hero, Plans, Join */
+@layer components {
+  .btn {
+    @apply inline-block cursor-pointer rounded border-0 bg-brand px-6 py-3.5 font-heading text-xl font-bold text-navy no-underline transition-colors duration-150 hover:bg-brand-dark hover:text-white;
+  }
+  .btn-small {
+    @apply px-4 py-1.5 text-[1.05rem];
+  }
+  .btn-outline {
+    @apply border-2 border-navy bg-transparent text-navy hover:bg-navy hover:text-white;
+  }
+}
