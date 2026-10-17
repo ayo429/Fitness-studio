@@ -82,11 +82,11 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
-            <li className="pt-5">
+            {/* <li className="pt-5">
               <a href="#join" onClick={close} className="btn block text-center">
                 Start free week
               </a>
-            </li>
+            </li> */}
           </ul>
         </nav>
       )}
