@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "db:test": "node src/db-test.js",
+    "db:migrate": "node src/migrate.js"
   },
   "keywords": [],
   "author": "",
