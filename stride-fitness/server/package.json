@@ -8,7 +8,8 @@
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
     "db:test": "node src/db-test.js",
-    "db:migrate": "node src/migrate.js"
+    "db:migrate": "node src/migrate.js",
+    "db:seed": "node src/seed.js"
   },
   "keywords": [],
   "author": "",
