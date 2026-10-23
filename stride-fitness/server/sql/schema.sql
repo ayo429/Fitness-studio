@@ -31,3 +31,15 @@ CREATE TABLE IF NOT EXISTS leads (
   plan_id    INTEGER REFERENCES plans(id) ON DELETE SET NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- One row per member: the plan they are on right now.
+-- user_id points at the "user" table that Better Auth created, so on a brand-new
+-- database the auth migration (npx auth@latest migrate) must run before this file.
+-- UNIQUE on user_id means a member can only be on one plan at a time.
+-- Deleting a user deletes their membership; a plan that has members cannot be deleted.
+CREATE TABLE IF NOT EXISTS memberships (
+  id        SERIAL PRIMARY KEY,
+  user_id   TEXT NOT NULL UNIQUE REFERENCES "user"(id) ON DELETE CASCADE,
+  plan_id   INTEGER NOT NULL REFERENCES plans(id),
+  chosen_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);

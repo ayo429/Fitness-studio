@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://fitness-studio-9ins.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

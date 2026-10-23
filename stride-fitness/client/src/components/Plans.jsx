@@ -1,8 +1,51 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import ApiStatus from './ApiStatus'
+import { authClient } from '../lib/auth-client'
+import { useAuthDialog } from '../context/AuthDialog'
 
 export default function Plans() {
   const { data: plans, loading, error, slow, retry } = useFetch('/api/plans')
+
+  const { data: session, isPending } = authClient.useSession()
+  const { openAuth } = useAuthDialog()
+  const navigate = useNavigate()
+  const [choosingId, setChoosingId] = useState(null) // the plan being saved right now
+  const [chooseError, setChooseError] = useState('')
+
+  // Signed out: ask them to sign in first. Signed in: save the plan, then show the dashboard.
+  async function choosePlan(plan) {
+    if (isPending) return
+    if (!session) {
+      openAuth()
+      return
+    }
+
+    setChooseError('')
+    setChoosingId(plan.id)
+    try {
+      const res = await fetch('/api/membership', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId: plan.id }),
+      })
+
+      if (res.status === 401) {
+        openAuth() // the login has expired
+        return
+      }
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        throw new Error(body.error || 'Could not save your plan. Please try again.')
+      }
+      navigate('/dashboard')
+    } catch (err) {
+      setChooseError(err.message || 'Could not reach the server. Please try again.')
+    } finally {
+      setChoosingId(null)
+    }
+  }
 
   return (
     <section id="plans" className="px-[5vw] py-14 sm:py-20">
@@ -49,18 +92,26 @@ export default function Plans() {
                   ))}
                 </ul>
 
-                <a
-                  href="#join"
-                  className={`btn text-center transition duration-200 motion-safe:hover:-translate-y-[3px] motion-safe:hover:scale-[1.04] ${
+                <button
+                  type="button"
+                  onClick={() => choosePlan(plan)}
+                  disabled={choosingId !== null}
+                  className={`btn cursor-pointer text-center transition duration-200 motion-safe:hover:-translate-y-[3px] motion-safe:hover:scale-[1.04] disabled:cursor-wait disabled:opacity-60 ${
                     f ? '' : 'btn-outline'
                   }`}
                 >
-                  Choose {plan.name}
-                </a>
+                  {choosingId === plan.id ? 'Saving…' : `Choose ${plan.name}`}
+                </button>
               </article>
             )
           })}
         </div>
+      )}
+
+      {chooseError && (
+        <p role="alert" className="mt-6 text-red-700">
+          {chooseError}
+        </p>
       )}
     </section>
   )
