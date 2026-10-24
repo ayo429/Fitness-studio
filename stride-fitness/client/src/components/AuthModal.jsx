@@ -51,7 +51,7 @@ export default function AuthModal({ open, onClose }) {
       // Both calls resolve to { data, error } instead of throwing for normal failures
       const result = isSignUp
         ? await authClient.signUp.email({ name, email, password })
-        : await authClient.signIn.email({ email, password })
+        : await authClient.signIn.email({ email, password, callbackURL: '/dashboard' })
 
       if (result.error) {
         setError(result.error.message || 'Something went wrong. Please try again.')
