@@ -43,3 +43,28 @@ CREATE TABLE IF NOT EXISTS memberships (
   plan_id   INTEGER NOT NULL REFERENCES plans(id),
   chosen_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- One row per purchase. Money is stored in cents (Stripe works in cents).
+-- status starts as 'pending' and only the Stripe webhook may change it to 'paid'.
+-- Orders are payment records, so deleting a user who has orders is blocked.
+CREATE TABLE IF NOT EXISTS orders (
+  id                SERIAL PRIMARY KEY,
+  user_id           TEXT NOT NULL REFERENCES "user"(id),
+  status            TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'paid', 'expired')),
+  total_cents       INTEGER NOT NULL,
+  currency          TEXT NOT NULL DEFAULT 'usd',
+  stripe_session_id TEXT UNIQUE,
+  created_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
+  paid_at           TIMESTAMPTZ
+);
+
+-- What was bought in each order. The plan name and price are copied in at the time
+-- of purchase, so old orders still show what was really charged if a plan changes later.
+CREATE TABLE IF NOT EXISTS order_items (
+  id               SERIAL PRIMARY KEY,
+  order_id         INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  plan_id          INTEGER REFERENCES plans(id) ON DELETE SET NULL,
+  plan_name        TEXT    NOT NULL,
+  unit_price_cents INTEGER NOT NULL,
+  quantity         INTEGER NOT NULL DEFAULT 1
+);
