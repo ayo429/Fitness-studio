@@ -2,7 +2,7 @@ const exploreLinks = [
   { href: '#programs', label: 'Programs' },
   { href: '#how-it-works', label: 'How it works' },
   { href: '#plans', label: 'Plans' },
-  { href: '#join', label: 'Start free week' },
+  { href: '#plans', label: 'Join now' },
 ]
 
 const headingClass =

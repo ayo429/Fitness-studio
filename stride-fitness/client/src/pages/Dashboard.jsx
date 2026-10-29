@@ -35,7 +35,7 @@ function PlanCard() {
 
       {data && !membership && (
         <>
-          <p className="mt-4">You have not chosen a plan yet. Pick one to start your free first week.</p>
+          <p className="mt-4">You have not chosen a plan yet. Pick one to get started.</p>
           <Link to="/#plans" className="btn inline-block text-center">
             Choose a plan
           </Link>

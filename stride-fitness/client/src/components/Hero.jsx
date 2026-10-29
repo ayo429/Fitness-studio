@@ -13,7 +13,7 @@ export default function Hero() {
           Strength, cardio, and mobility classes for every level, led by coaches who adjust the
           workout to you.
         </p>
-        <a href="#join" className="btn">Start your free week</a>
+        <a href="#plans" className="btn">Join today</a>
       </div>
     </section>
   )

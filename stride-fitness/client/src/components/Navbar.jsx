@@ -93,7 +93,7 @@ export default function Navbar() {
             )}
 
             <li>
-              <Link to="/#join" className="btn btn-small">Start free week</Link>
+              <Link to="/#plans" className="btn btn-small">Join now</Link>
             </li>
           </ul>
         </nav>
@@ -165,7 +165,7 @@ export default function Navbar() {
 
             {/* <li className="pt-5">
               <Link to="/#join" onClick={close} className="btn block text-center">
-                Start free week
+                Join now
               </Link>
             </li> */}
           </ul>
