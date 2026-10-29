@@ -19,7 +19,7 @@ export const auth = betterAuth({
   // 5 minutes have passed since it was last extended, the 30 minutes start again.
   // So someone who stays away for about half an hour is signed out.
   session: {
-    expiresIn: 60 * 30,
-    updateAge: 60 * 5,
-  },
+    expiresIn: 20,
+    updateAge: 5,
+},
 })

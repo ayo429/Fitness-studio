@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { authClient } from '../lib/auth-client'
 import { useAuthDialog } from '../context/AuthDialog'
 
@@ -35,6 +36,7 @@ export default function Navbar() {
 
   const handleSignOut = async () => {
     await authClient.signOut()
+    toast.success('You have been signed out.')
     close()
   }
 
@@ -97,7 +99,7 @@ export default function Navbar() {
             )}
 
             <li>
-              <Link to="/#plan" className="btn btn-small">Start free week</Link>
+              <Link to="/#join" className="btn btn-small">Start free week</Link>
             </li>
           </ul>
         </nav>
