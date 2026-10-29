@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
 import ApiStatus from './ApiStatus'
 import { authClient } from '../lib/auth-client'
@@ -10,11 +9,12 @@ export default function Plans() {
 
   const { data: session, isPending } = authClient.useSession()
   const { openAuth } = useAuthDialog()
-  const navigate = useNavigate()
-  const [choosingId, setChoosingId] = useState(null) // the plan being saved right now
+  const [choosingId, setChoosingId] = useState(null) // the plan being sent to checkout right now
   const [chooseError, setChooseError] = useState('')
 
-  // Signed out: ask them to sign in first. Signed in: save the plan, then show the dashboard.
+  // Signed out: ask them to sign in first.
+  // Signed in: ask our server to start a Stripe checkout for this plan, then go to Stripe's page.
+  // We only send the plan's id. The server looks up the real price itself.
   async function choosePlan(plan) {
     if (isPending) return
     if (!session) {
@@ -25,32 +25,36 @@ export default function Plans() {
     setChooseError('')
     setChoosingId(plan.id)
     try {
-      const res = await fetch('/api/membership', {
-        method: 'PUT',
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ planId: plan.id }),
       })
 
       if (res.status === 401) {
         openAuth() // the login has expired
+        setChoosingId(null)
         return
       }
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}))
-        throw new Error(body.error || 'Could not save your plan. Please try again.')
+
+      const body = await res.json().catch(() => ({}))
+      if (!res.ok || !body.url) {
+        throw new Error(body.error || 'Could not start checkout. Please try again.')
       }
-      navigate('/dashboard')
+
+      // Off to Stripe's hosted payment page. The button stays disabled while the browser leaves.
+      window.location.href = body.url
+      return
     } catch (err) {
       setChooseError(err.message || 'Could not reach the server. Please try again.')
-    } finally {
-      setChoosingId(null)
     }
+    setChoosingId(null)
   }
 
   return (
     <section id="plans" className="px-[5vw] py-14 sm:py-20">
       <h2>Choose your plan</h2>
-      <p className="mb-10">Every plan includes a free first week. Cancel any time.</p>
+      <p className="mb-10">Pay securely with Stripe. Your membership starts as soon as your first month is paid.</p>
 
       <ApiStatus loading={loading} error={error} slow={slow} retry={retry} what="plans" />
 
@@ -100,7 +104,7 @@ export default function Plans() {
                     f ? '' : 'btn-outline'
                   }`}
                 >
-                  {choosingId === plan.id ? 'Saving…' : `Choose ${plan.name}`}
+                  {choosingId === plan.id ? 'Opening checkout…' : `Choose ${plan.name}`}
                 </button>
               </article>
             )

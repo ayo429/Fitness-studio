@@ -9,6 +9,7 @@ import Plans from './components/Plans'
 import Join from './components/Join'
 import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard'
+import CheckoutSuccess from './pages/CheckoutSuccess'
 
 // The landing page: all the sections stacked on one page, as before
 function Home() {
@@ -46,6 +47,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
           {/* Any other address goes back to the home page */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

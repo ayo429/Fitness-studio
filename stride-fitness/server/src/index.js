@@ -3,9 +3,12 @@ import express from 'express'
 import cors from 'cors'
 import { toNodeHandler, fromNodeHeaders } from 'better-auth/node'
 import { auth } from './auth.js'
+import { stripeWebhook } from './routes/stripeWebhook.js'
 import programsRouter from './routes/programs.js'
 import plansRouter from './routes/plans.js'
 import membershipRouter from './routes/membership.js'
+import checkoutRouter from './routes/checkout.js'
+import ordersRouter from './routes/orders.js'
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -21,6 +24,10 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }))
 // It must come BEFORE express.json(), because it reads the request body itself.
 // (*splat is the Express 5 way of writing "everything under /api/auth/")
 app.all('/api/auth/*splat', toNodeHandler(auth))
+
+// Stripe's webhook also comes BEFORE express.json(). Stripe signs the exact bytes it
+// sends, so this route needs the untouched raw body, not a parsed copy.
+app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), stripeWebhook)
 
 app.use(express.json())
 
@@ -39,6 +46,8 @@ app.get('/api/me', async (req, res) => {
 app.use('/api/programs', programsRouter)
 app.use('/api/plans', plansRouter)
 app.use('/api/membership', membershipRouter)
+app.use('/api/checkout', checkoutRouter)
+app.use('/api/orders', ordersRouter)
 
 // Any error passed to next(err) ends up here: log it, send a safe message
 app.use((err, req, res, next) => {
