@@ -77,8 +77,12 @@ export default function Navbar() {
               <li className="flex items-center gap-6">
                 {user ? (
                   <>
-                    <Link to="/dashboard" className="text-snow no-underline hover:underline">
-                      Dashboard
+                    <Link
+                      to="/dashboard"
+                      title="Go to your dashboard"
+                      className="max-w-[10rem] truncate text-snow no-underline hover:underline"
+                    >
+                      Hi, {user.name}
                     </Link>
                     <button type="button" onClick={handleSignOut} className={textButton}>
                       Sign out
@@ -93,7 +97,7 @@ export default function Navbar() {
             )}
 
             <li>
-              <Link to="/#plans" className="btn btn-small">Join now</Link>
+              <Link to="/#join" className="btn btn-small">Start free week</Link>
             </li>
           </ul>
         </nav>
@@ -121,6 +125,16 @@ export default function Navbar() {
           className="absolute inset-x-0 top-full border-t border-white/10 bg-navy px-[5vw] pb-6 shadow-[0_14px_30px_rgba(14,42,71,0.35)] lg:hidden"
         >
           <ul className="m-0 flex list-none flex-col p-0">
+            {/* Signed in: the greeting comes first, and doubles as the way to the dashboard */}
+            {!isPending && user && (
+              <li className="border-b border-white/10">
+                <Link to="/dashboard" onClick={close} className="block py-4 text-snow no-underline">
+                  <span className="block font-semibold">Hi, {user.name}</span>
+                  <span className="block text-sm opacity-75">View your dashboard</span>
+                </Link>
+              </li>
+            )}
+
             {links.map((link) => (
               <li key={link.to} className="border-b border-white/10">
                 <Link to={link.to} onClick={close} className="block py-4 text-snow no-underline">
@@ -133,12 +147,6 @@ export default function Navbar() {
               <>
                 {user ? (
                   <>
-                    <li className="border-b border-white/10">
-                      <p className="m-0 pt-4 text-snow">Hi, {user.name}</p>
-                      <Link to="/dashboard" onClick={close} className="block py-4 text-snow no-underline">
-                        Dashboard
-                      </Link>
-                    </li>
                     <li className="border-b border-white/10">
                       <button
                         type="button"
@@ -165,7 +173,7 @@ export default function Navbar() {
 
             {/* <li className="pt-5">
               <Link to="/#join" onClick={close} className="btn block text-center">
-                Join now
+                Start free week
               </Link>
             </li> */}
           </ul>
