@@ -97,7 +97,7 @@ export default function Navbar() {
             )}
 
             <li>
-              <Link to="/#join" className="btn btn-small">Start free week</Link>
+              <Link to="/#plan" className="btn btn-small">Start free week</Link>
             </li>
           </ul>
         </nav>
