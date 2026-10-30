@@ -173,6 +173,7 @@ export default function AuthModal({ open, onClose }) {
           </p>
         </>
       )}
+
     </dialog>
   )
 }

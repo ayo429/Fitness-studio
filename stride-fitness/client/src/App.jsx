@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { AuthDialogProvider } from './context/AuthDialog'
-import IdleLogout from './components/IdleLogout'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Programs from './components/Programs'
@@ -45,7 +44,6 @@ function App() {
     <BrowserRouter>
       <AuthDialogProvider>
         <ScrollManager />
-        <IdleLogout />
         <ToastContainer position="top-right" autoClose={4000} />
         <Navbar />
         <Routes>

@@ -47,12 +47,29 @@ function PlanCard() {
 
 export default function Dashboard() {
   // Ask the login system who is here
-  const { data: session, isPending } = authClient.useSession()
+  const { data: session, isPending, error: sessionError, refetch } = authClient.useSession()
+
 
   if (isPending) {
     return (
       <main className="px-[5vw] py-14 sm:py-20">
         <p>Loading your account…</p>
+      </main>
+    )
+  }
+
+  // The check itself failed (server or database unreachable). That is different from
+  // "nobody is signed in", so say so and let the member try again instead of redirecting.
+  if (sessionError) {
+    return (
+      <main className="px-[5vw] py-14 sm:py-20">
+        <article className={card} role="alert">
+          <h3>We could not check your sign-in</h3>
+          <p>The server did not answer in time. Please try again.</p>
+          <button type="button" onClick={() => refetch()} className="btn cursor-pointer">
+            Try again
+          </button>
+        </article>
       </main>
     )
   }

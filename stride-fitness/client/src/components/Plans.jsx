@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 import useFetch from '../hooks/useFetch'
 import ApiStatus from './ApiStatus'
 import { authClient } from '../lib/auth-client'
@@ -11,6 +10,7 @@ export default function Plans() {
   const { data: session, isPending } = authClient.useSession()
   const { openAuth } = useAuthDialog()
   const [choosingId, setChoosingId] = useState(null) // the plan being sent to checkout right now
+  const [chooseError, setChooseError] = useState('')
 
   // Signed out: ask them to sign in first.
   // Signed in: ask our server to start a Stripe checkout for this plan, then go to Stripe's page.
@@ -22,6 +22,7 @@ export default function Plans() {
       return
     }
 
+    setChooseError('')
     setChoosingId(plan.id)
     try {
       const res = await fetch('/api/checkout', {
@@ -45,7 +46,7 @@ export default function Plans() {
       window.location.href = body.url
       return
     } catch (err) {
-      toast.error(err.message || 'Could not reach the server. Please try again.')
+      setChooseError(err.message || 'Could not reach the server. Please try again.')
     }
     setChoosingId(null)
   }
@@ -109,6 +110,12 @@ export default function Plans() {
             )
           })}
         </div>
+      )}
+
+      {chooseError && (
+        <p role="alert" className="mt-6 text-red-700">
+          {chooseError}
+        </p>
       )}
     </section>
   )

@@ -14,12 +14,4 @@ export const auth = betterAuth({
 
   // Only requests coming from our own frontend are accepted
   trustedOrigins: [process.env.CLIENT_URL].filter(Boolean),
-
-  // Login timeout: a session lasts 30 minutes. Each time it is used, and more than
-  // 5 minutes have passed since it was last extended, the 30 minutes start again.
-  // So someone who stays away for about half an hour is signed out.
-  session: {
-    expiresIn: 20,
-    updateAge: 5,
-},
 })

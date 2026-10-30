@@ -3,8 +3,8 @@ import { Link, Navigate, useSearchParams } from 'react-router-dom'
 import { authClient } from '../lib/auth-client'
 
 const card = 'max-w-xl rounded-[20px] border-2 border-tint bg-white px-8 py-9'
-const MAX_TRIES = 10 // ask up to 10 times...
-const WAIT_MS = 1500 // ...waiting 1.5 seconds between asks
+const MAX_TRIES = 30 // ask up to 30 times...
+const WAIT_MS = 1500 // ...waiting 1.5 seconds between asks (about 45 seconds in total)
 
 const money = (cents) => `$${(cents / 100).toFixed(2)}`
 
@@ -130,12 +130,31 @@ export default function CheckoutSuccess() {
   const [params] = useSearchParams()
   const orderId = params.get('order')
 
-  const { data: session, isPending } = authClient.useSession()
+  const { data: session, isPending, error: sessionError, refetch } = authClient.useSession()
 
   if (isPending) {
     return (
       <main className="px-[5vw] py-14 sm:py-20">
         <p>Loading…</p>
+      </main>
+    )
+  }
+
+  // The check itself failed (server or database unreachable). That is different from
+  // "nobody is signed in", so say so and let the member try again instead of redirecting.
+  if (sessionError) {
+    return (
+      <main className="px-[5vw] py-14 sm:py-20">
+        <article className={card} role="alert">
+          <h2>We could not check your sign-in</h2>
+          <p>
+            Your payment is not affected. The server did not answer in time, which can happen when it has just
+            woken up. Please try again.
+          </p>
+          <button type="button" onClick={() => refetch()} className="btn cursor-pointer">
+            Try again
+          </button>
+        </article>
       </main>
     )
   }
